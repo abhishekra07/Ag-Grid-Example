@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.noStyle.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-grid.css">
+  <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-theme-material.css">
+  <link rel="stylesheet" href="https://uicore.dellcdn.com/1.6.1/css/dds-reboot.min.css">
+  <link rel="stylesheet" href="https://uicore.dellcdn.com/1.6.1/css/dds-all-with-fonts.min.css">
+  <script src="https://uicore.dellcdn.com/1.6.1/js/index.min.js"></script>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      min-height: 100%;
+      background-color: rgb(255, 255, 255);
+      color: rgb(0, 0, 0);
+      font-family: Roboto, "Cordia New", "Microsoft Sans Serif", Utsaah, "Devanagari MT", "Nirmala UI", Latha, InaiMathi, Gautami, "Telugu Sangam MN", Tunga, "Kannada Sangam MN", Kartika, "Malayalam Sangam MN", Shruti, "Nirmala UI", "Gujarati MT", "Gujarati Sangam MN", Vrinda, "Bangla Sangam MN", "Meiryo UI Reg", "メイリオ Reg", "MS UI Gothic Reg", "Hiragino Kaku Gothic Reg", "ヒラギノ角ゴ Pro W3 Reg", "Microsoft YaHei", 微软雅黑, "Hiragino Sans GB", "Microsoft JhengHei", 微軟正黑體, "Malgun Gothic", "맑은 고딕", Gulim, AppleGothic, "Apple LiGothic", "LiHei Pro", Osaka, STHeiti, 华文黑体, STXihei, 华文细黑, SimHei, 黑体, "Arial Unicode MS", Arial, sans-serif;
+      font-size: 0.875rem;
+      font-weight: 400;
+      line-height: 1.5;
+      text-align: left;
+      margin: 0px;
+    }
+    .ag-theme-material .ag-ltr .ag-cell {
+        border-right-width: 0 !important;
+    }
+    .ag-cell-focus {
+      border: none !important;
+    }
+    .name-height_7tL4s {
+        height: 1.2rem;
+    }
+    .ag-theme-material .ag-header-row {
+      font-size: .875rem;
+    }
+    .ag-theme-material .ag-pinned-right-header {
+      border-left: none !important;
+    }
+
+    .ag-theme-material .ag-cell.ag-cell-first-right-pinned:not(.ag-cell-range-left):not(ag-cell-range-single-cell) {
+      border-left: none !important;
+    }
+  </style>
+</head>
+
+<body>
+  <svg id="dds2-icon-defs" aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;"
+  version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+      <symbol id="dds__cube" viewBox="0 0 32 32">
+          <title>dds__cube</title>
+          <path
+              d="M16.001 0l-13.858 8.001v16l13.858 7.999 13.855-7.999v-16l-13.855-8.001zM26.754 8.673l-10.755 6.028-10.755-6.028 10.755-6.211 10.755 6.211zM4.275 10.576l10.642 5.963v12.373l-10.642-6.142v-12.194zM17.051 28.929v-12.375l10.673-5.98v12.194l-10.673 6.162z">
+          </path>
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="dds__arrow-up" viewbox="0 0 32 32">
+        <title>dds__arrow-up</title>
+        <path d="M29.58 15.58l-13.58-15.58-13.58 15.58 1.6 1.4 10.92-12.52v27.54h2.12v-27.54l10.94 12.52z"/>
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="dds__arrow-down" viewbox="0 0 32 32">
+        <title>dds__arrow-down</title>
+        <path d="M28 15.020l-10.94 12.52v-27.54h-2.12v27.54l-10.94-12.52-1.6 1.4 13.6 15.58 13.58-15.58z"/>
+      </symbol>
+  </defs>
+</svg>
+  <h1>Hello from AG Grid!</h1>
+  <button role="button" class="dds__btn dds__btn-secondary dds__form-group" style="width:200px"
+    onclick="onBtnExport()">Export as CSV<span class="dds__badge dds__badge-dark"></span></button>
+  <div id="myGrid" class="ag-theme-material" style="height: 100%; width:100%;"></div>
+  
+  <!-- Page Size:
+  <select onchange="onPageSizeChanged()" id="page-size">
+    <option value="10" selected>10</option>
+    <option value="100">100</option>
+    <option value="500">500</option>
+    <option value="1000">1000</option>
+  </select> -->
+
+  <script type="text/javascript" charset="utf-8">
+    // specify the columns
+    var gridOptions = {
+      defaultColDef: {
+        editable: false,
+        resizable: true,
+        minWidth: 100,
+        flex: 1,
+        sortable: true,
+        sort: 'desc'
+      },
+      pagination: true,
+      suppressExcelExport: true,
+      popupParent: document.body,
+      paginationPageSize: 10,
+      // paginationNumberFormatter: function (params) {
+      //   return '[' + params.value.toLocaleString() + ']';
+      // },
+      columnDefs: [
+        {
+          field: 'Issue Description', icons: {
+            // not very useful, but demonstrates you can just have strings
+            sortAscending: '&#8593',
+            sortDescending: '&#8595;',
+          },
+          minWidth: 200
+        },
+        { field: 'Ticket Number', minWidth: 300 },
+        { field: 'Created', minWidth: 200 },
+        { field: 'Status', minWidth: 200 },
+        { field: 'Created By', minWidth: 200 },
+        {
+          headerName: 'Action',
+          cellRenderer: 'btnCellRenderer',
+          cellRendererParams: {
+            // onClick: onEditButtonClick(),
+            clicked: function() {
+              alert(`was clicked`);
+            },
+            label: 'Action'
+          },
+          resizable: false,
+          pinned: 'right',
+          sortable: false
+        }
+        // { field: 'Action', sortable: false, minWidth: 200 }
+      ],
+
+      rowData: [
+        { 'Issue Description': 'Test', 'Ticket Number': 'INC0018837', 'Created': '8/10/2021', 'Status': 'New', 'Created By': '0502_StaaS_POS2_DCN1' },
+        { 'Issue Description': 'Test from AB', 'Ticket Number': 'INC0018838', 'Created': '8/10/2021', 'Status': 'New', 'Created By': '0502_StaaS_POS2_DCN1' },
+        { 'Issue Description': 'Pagination 5', 'Ticket Number': 'INC0018839', 'Created': '8/10/2021', 'Status': 'New', 'Created By': '0502_StaaS_POS2_DCN1'},
+      ],
+
+      components: {
+        btnCellRenderer: BtnCellRenderer
+      }
+    };
+
+    // lookup the container we want the Grid to use
+    const eGridDiv = document.querySelector('#myGrid');
+
+    // create the grid passing in the div to use together with the columns & data we want to use
+    new agGrid.Grid(eGridDiv, gridOptions);
+
+    function onBtnExport() {
+      gridOptions.api.exportDataAsCsv();
+    }
+
+
+    agGrid
+    .simpleHttpRequest({
+      url: 'https://www.ag-grid.com/example-assets/olympic-winners.json',
+    })
+    .then(function (data) {
+      let rows = [];
+      console.log('data from service...',data);
+      data.forEach(element => {
+        rows.push({
+          'Issue Description': element.athlete,
+          'Ticket Number': element.year,
+        'Created': element.date,
+        'Status': 'New',
+        'Created By' : element.country
+        });
+      });
+      gridOptions.api.setRowData(rows);
+    });
+
+    function onPageSizeChanged(newPageSize) {
+      let value = document.getElementById('page-size').value;
+      gridOptions.api.paginationSetPageSize(Number(value));
+    }
+
+    function BtnCellRenderer() {}
+
+    BtnCellRenderer.prototype.init = function(params) {
+      this.params = params;
+
+      this.eGui = document.createElement("button");
+      this.eGui.innerHTML = "...";
+      this.eGui.classList.add("dds__btn");
+      this.eGui.classList.add("dds__btn-custom");
+      this.eGui.classList.add("dds__text-truncate");
+      this.eGui.classList.add("dds__d-flex");
+      this.eGui.classList.add("dds__align-items-end");
+
+
+      this.btnClickedHandler = this.btnClickedHandler.bind(this);
+    };
+
+    BtnCellRenderer.prototype.getGui = function() {
+      return this.eGui;
+    };
+
+    BtnCellRenderer.prototype.destroy = function() {
+      this.eGui.removeEventListener("click", this.btnClickedHandler);
+    };
+
+    BtnCellRenderer.prototype.btnClickedHandler = function(event) {
+      this.params.clicked(this.params.value);
+    };
+  </script>
+</body>
+
+</html>

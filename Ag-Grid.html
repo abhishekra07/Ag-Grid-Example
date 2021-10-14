@@ -39,32 +39,62 @@
     .ag-theme-material .ag-cell.ag-cell-first-right-pinned:not(.ag-cell-range-left):not(ag-cell-range-single-cell) {
       border-left: none !important;
     }
+
+    #myGrid {
+       position: absolute;
+       top: 150px;
+    }
+
+    .flex-container {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 10px;
+    }
+
+    .btn {
+      padding: 10px 5px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 20px;;
+    } 
+    
+    .btn-primary {
+      color: white;
+      background-color: rgb(140, 228, 255);
+    }
+
+    .btn.btn-primary:hover {
+      background-color: #47ccea;
+      box-shadow: 2px 2px 15px #ccc;
+    }
+
+    .action-btn {
+      border: none;
+      padding: 10px 25px;
+      cursor: pointer;
+    }
+
+    .action-btn:hover {
+      background-color: rgb(95, 204, 255);
+    }
+
+    .action-btn::before {
+      content: "...";
+      font-weight: 600;
+      letter-spacing: 3px;
+    }
+
+
   </style>
 </head>
 
 <body>
-  <svg id="dds2-icon-defs" aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;"
-  version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <defs>
-      <symbol id="dds__cube" viewBox="0 0 32 32">
-          <title>dds__cube</title>
-          <path
-              d="M16.001 0l-13.858 8.001v16l13.858 7.999 13.855-7.999v-16l-13.855-8.001zM26.754 8.673l-10.755 6.028-10.755-6.028 10.755-6.211 10.755 6.211zM4.275 10.576l10.642 5.963v12.373l-10.642-6.142v-12.194zM17.051 28.929v-12.375l10.673-5.98v12.194l-10.673 6.162z">
-          </path>
-      </symbol>
-      <symbol xmlns="http://www.w3.org/2000/svg" id="dds__arrow-up" viewbox="0 0 32 32">
-        <title>dds__arrow-up</title>
-        <path d="M29.58 15.58l-13.58-15.58-13.58 15.58 1.6 1.4 10.92-12.52v27.54h2.12v-27.54l10.94 12.52z"/>
-      </symbol>
-      <symbol xmlns="http://www.w3.org/2000/svg" id="dds__arrow-down" viewbox="0 0 32 32">
-        <title>dds__arrow-down</title>
-        <path d="M28 15.020l-10.94 12.52v-27.54h-2.12v27.54l-10.94-12.52-1.6 1.4 13.6 15.58 13.58-15.58z"/>
-      </symbol>
-  </defs>
-</svg>
-  <h1>Hello from AG Grid!</h1>
-  <button role="button" class="dds__btn dds__btn-secondary dds__form-group" style="width:200px"
-    onclick="onBtnExport()">Export as CSV<span class="dds__badge dds__badge-dark"></span></button>
+  <div class="flex-container">
+    <h1>Hello from AG Grid!</h1>
+    <button class="btn btn-primary" style="width:200px"
+      onclick="onBtnExport()">Export as CSV</button>
+  </div>
   <div id="myGrid" class="ag-theme-material" style="height: 100%; width:100%;"></div>
   
   <!-- Page Size:
@@ -124,9 +154,9 @@
       ],
 
       rowData: [
-        { 'Issue Description': 'Test', 'Ticket Number': 'INC0018837', 'Created': '8/10/2021', 'Status': 'New', 'Created By': '0502_StaaS_POS2_DCN1' },
-        { 'Issue Description': 'Test from AB', 'Ticket Number': 'INC0018838', 'Created': '8/10/2021', 'Status': 'New', 'Created By': '0502_StaaS_POS2_DCN1' },
-        { 'Issue Description': 'Pagination 5', 'Ticket Number': 'INC0018839', 'Created': '8/10/2021', 'Status': 'New', 'Created By': '0502_StaaS_POS2_DCN1'},
+        { 'Issue Description': 'Test', 'Ticket Number': 'INC0018837', 'Created': '8/10/2021', 'Status': 'New', 'Created By': 'User' },
+        { 'Issue Description': 'Test from AB', 'Ticket Number': 'INC0018838', 'Created': '8/10/2021', 'Status': 'New', 'Created By': 'User' },
+        { 'Issue Description': 'Pagination 5', 'Ticket Number': 'INC0018839', 'Created': '8/10/2021', 'Status': 'New', 'Created By': 'User'},
       ],
 
       components: {
@@ -175,14 +205,7 @@
       this.params = params;
 
       this.eGui = document.createElement("button");
-      this.eGui.innerHTML = "...";
-      this.eGui.classList.add("dds__btn");
-      this.eGui.classList.add("dds__btn-custom");
-      this.eGui.classList.add("dds__text-truncate");
-      this.eGui.classList.add("dds__d-flex");
-      this.eGui.classList.add("dds__align-items-end");
-
-
+      this.eGui.classList.add('action-btn')
       this.btnClickedHandler = this.btnClickedHandler.bind(this);
     };
 

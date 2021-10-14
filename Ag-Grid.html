@@ -126,17 +126,17 @@
       // },
       columnDefs: [
         {
-          field: 'Issue Description', icons: {
+          field: 'Athelete Name', icons: {
             // not very useful, but demonstrates you can just have strings
             sortAscending: '&#8593',
             sortDescending: '&#8595;',
           },
           minWidth: 200
         },
-        { field: 'Ticket Number', minWidth: 300 },
-        { field: 'Created', minWidth: 200 },
-        { field: 'Status', minWidth: 200 },
-        { field: 'Created By', minWidth: 200 },
+        { field: 'Year', minWidth: 200 },
+        { field: 'Date', minWidth: 200 },
+        { field: 'Age', minWidth: 200 },
+        { field: 'Country', minWidth: 200 },
         {
           headerName: 'Action',
           cellRenderer: 'btnCellRenderer',
@@ -154,11 +154,7 @@
         // { field: 'Action', sortable: false, minWidth: 200 }
       ],
 
-      rowData: [
-        { 'Issue Description': 'Test', 'Ticket Number': 'INC0018837', 'Created': '8/10/2021', 'Status': 'New', 'Created By': 'User' },
-        { 'Issue Description': 'Test from AB', 'Ticket Number': 'INC0018838', 'Created': '8/10/2021', 'Status': 'New', 'Created By': 'User' },
-        { 'Issue Description': 'Pagination 5', 'Ticket Number': 'INC0018839', 'Created': '8/10/2021', 'Status': 'New', 'Created By': 'User'},
-      ],
+      rowData: [],
 
       components: {
         btnCellRenderer: BtnCellRenderer
@@ -185,11 +181,11 @@
       console.log('data from service...',data);
       data.forEach(element => {
         rows.push({
-          'Issue Description': element.athlete,
-          'Ticket Number': element.year,
-        'Created': element.date,
-        'Status': 'New',
-        'Created By' : element.country
+          'Athelete Name': element.athlete,
+          'Year': element.year,
+        'Date': element.date,
+        'Age': element.age,
+        'Country' : element.country
         });
       });
       gridOptions.api.setRowData(rows);
